@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Macros Calculator</title>
+    <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 20px;
+      background-image: url('/static/img/bg.jpeg');
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+    }
+    form {
+      background-color: #fff;
+      padding: 40px 80px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 250px;
+      margin: 0 auto;
+    }
+    label {
+      margin-bottom: 5px;
+      display: block;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    input[type="submit"] {
+      background-color: #3498db;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      margin: 0 auto; /* Center the button */
+      display: block;
+    }
+    input[type="submit"]:hover {
+      background-color: #2980b9;
+
+    }
+
+        p {
+         padding-right: 30px;}
+
+    button {
+    background-color: #3498db;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      margin: 0 auto; /* Center the button */
+      display: block;
+      margin-top: 20px
+    }
+
+        button:hover {
+      background-color: #2980b9;
+
+    }
+
+
+</style>
+</head>
+<body>
+      {% if not sent %}
+      <h1 style="display: flex; justify-content: center; padding-top: 30px">Calculate The Macros In Your Food!</h1>
+        <div style="display: flex; justify-content: center; padding-top: 200px">
+            <form action="/" method="POST">
+                <label for="food">Type in the food here!</label><br>
+                <input type="text" id="food" name="food", placeholder="E.g. 5g of Chicken Thigh... / 3 Oranges... "><br>
+                <input type="submit" value="Submit">
+                <p style="font-size: 10px;">*If no quantity is specified, the default quantity is 100 grams.</p>
+              </form>
+        </div>
+    {% else %}
+      <h1 style="display: flex; justify-content: center; padding-top: 30px">Here Are The Macros!</h1>
+        {% for food in text %}
+        <div style="display: flex; justify-content: center; padding-top: 20px">
+            <p><b>Name:</b> {{food['name']}} </p>
+            <p><b>Calories:</b> {{food['calories']}}kcal</p>
+            <p><b>Carbohydrates:</b> {{food['carbohydrates_total_g']}}g</p>
+            <p><b>Protein:</b> {{food['protein_g']}}g</p>
+            <p><b>Fat:</b> {{food['fat_total_g']}}g</p>
+        </div>
+        <hr>
+        {% endfor %}
+    <button onclick="window.location.href='/'">Return to Home</button>
+    {% endif %}
+
+</body>
+</html>
